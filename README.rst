@@ -1,4 +1,4 @@
-cmsplugin_abstracts
+cmsplugin_articles
 ===================
 
 Articles and sections
