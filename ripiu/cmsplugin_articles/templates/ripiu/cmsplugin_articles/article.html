@@ -1,8 +1,5 @@
 {% load cms_tags staticfiles sekizai_tags thumbnail i18n %}
-{% addtoblock "css" %}
-  <link rel="stylesheet" href="{% static "radames_article/css/article.css" %}">
-{% endaddtoblock %}
-<article class="">
+<article class="ripiu">
   {% if instance.featured_image or instance.title or instance.subtitle %}
     {% include "./header.html" with image=instance.featured_image title=instance.title subtitle=instance.subtitle %}
   {% endif %}
