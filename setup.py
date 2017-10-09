@@ -1,6 +1,6 @@
 from setuptools import setup #, find_packages
 
-from ripiu.cmsplugin_filer_articles import __version__
+from ripiu.cmsplugin_articles import __version__
 
 setup(
     name="ripiu.cmsplugin_articles",
