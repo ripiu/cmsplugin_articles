@@ -37,11 +37,6 @@ class HeadedPluginModel(CMSPlugin):
         _('subtitle'), max_length=400, default='', blank=True,
     )
 
-    featured_image = FilerImageField(
-        blank=True, null=True,
-        verbose_name=_('featured image'),
-    )
-
     def __str__(self):
         return self.title or ""
 
@@ -49,7 +44,19 @@ class HeadedPluginModel(CMSPlugin):
         abstract = True
 
 
-class ArticlePluginModel(HeadedPluginModel):
+class ImageHeadedPluginModel(HeadedPluginModel):
+    """Something with a title and a featured image"""
+
+    featured_image = FilerImageField(
+        blank=True, null=True,
+        verbose_name=_('featured image'),
+    )
+
+    class Meta:
+        abstract = True
+
+
+class ArticlePluginModel(ImageHeadedPluginModel):
     """
     An article
     """
@@ -66,7 +73,7 @@ class ArticlePluginModel(HeadedPluginModel):
         verbose_name_plural = _('Articles')
 
 
-class SectionPluginModel(HeadedPluginModel):
+class SectionPluginModel(ImageHeadedPluginModel):
     """
     A section
     """
