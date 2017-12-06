@@ -1,11 +1,10 @@
-from django.conf import settings
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
-from cms.extensions import PageExtension, TitleExtension
-from cms.extensions.extension_pool import extension_pool
 from cms.models import CMSPlugin
 from cms.models.fields import PageField
 from filer.fields.image import FilerImageField
+
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
+
 
 class HeadedPluginModel(CMSPlugin):
     H1 = 1
@@ -22,54 +21,56 @@ class HeadedPluginModel(CMSPlugin):
         (H5, 'H5'),
         (H6, 'H6'),
     )
-    
+
     title = models.CharField(
-        _('title'), max_length = 400, default = '', blank = True
+        _('title'), max_length=400, default='', blank=True
     )
-    
+
     heading_level = models.PositiveSmallIntegerField(
         _('heading level'),
-        choices = HEADING_LEVELS,
-        default = H2,
-        help_text = _('Choose a heading level'),
+        choices=HEADING_LEVELS,
+        default=H2,
+        help_text=_('Choose a heading level'),
     )
-    
+
     subtitle = models.CharField(
-        _('subtitle'), max_length = 400, default = '', blank = True,
+        _('subtitle'), max_length=400, default='', blank=True,
     )
-    
+
     featured_image = FilerImageField(
-        blank = True, null = True,
-        verbose_name = _('featured image'),
+        blank=True, null=True,
+        verbose_name=_('featured image'),
     )
-    
+
     def __str__(self):
         return self.title or ""
-    
+
     class Meta:
         abstract = True
+
 
 class ArticlePluginModel(HeadedPluginModel):
     """
     An article
     """
-    
+
     full_article = PageField(
-        on_delete = models.SET_NULL,
-        blank = True, null = True,
-        verbose_name = _("Full article page"),
-        help_text = _('You may specify a page with a full article'),
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        verbose_name=_("Full article page"),
+        help_text=_('You may specify a page with a full article'),
     )
-    
+
     class Meta:
         verbose_name = _('Article')
         verbose_name_plural = _('Articles')
+
 
 class SectionPluginModel(HeadedPluginModel):
     """
     A section
     """
-    
+
     class Meta:
         verbose_name = _('Section')
         verbose_name_plural = _('Sections')

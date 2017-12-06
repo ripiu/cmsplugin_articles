@@ -1,7 +1,10 @@
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
+
 from django.utils.translation import ugettext_lazy as _
+
 from .models import ArticlePluginModel, SectionPluginModel
+
 
 class ArticlePlugin(CMSPluginBase):
     model = ArticlePluginModel
@@ -10,7 +13,9 @@ class ArticlePlugin(CMSPluginBase):
     render_template = 'ripiu/cmsplugin_articles/article.html'
     allow_children = True
 
+
 plugin_pool.register_plugin(ArticlePlugin)
+
 
 class SectionPlugin(CMSPluginBase):
     model = SectionPluginModel
@@ -18,5 +23,6 @@ class SectionPlugin(CMSPluginBase):
     module = "Ri+"
     render_template = 'ripiu/cmsplugin_articles/section.html'
     allow_children = True
+
 
 plugin_pool.register_plugin(SectionPlugin)

@@ -1,19 +1,19 @@
-from setuptools import setup #, find_packages
+from setuptools import setup
 
 from ripiu.cmsplugin_articles import __version__
 
 setup(
-    name="ripiu.cmsplugin_articles",
+    name='ripiu.cmsplugin_articles',
     version=__version__,
     url='https://github.com/ripiu/ripiu.cmsplugin_articles',
     license='BSD-new',
-    description="Articles",
+    description='Articles',
     long_description=open('README.rst').read(),
     author='matteo vezzola',
     author_email='matteo@studioripiu.it',
     # find_packages doesn't like implicit namespace packages:
     # https://stackoverflow.com/questions/27047443/
-    # packages=find_packages(), 
+    # packages=find_packages(),
     packages=['ripiu.cmsplugin_articles'],
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -26,8 +26,8 @@ setup(
     ],
     # TODO: check requirements
     install_requires=[
-        "Django >= 1.8",
-        "django-cms >= 3.1",
+        'Django >= 1.8',
+        'django-cms >= 3.1',
     ],
     # ripiu is an implicit namespace package, so I need python>=3.3
     python_requires='>=3.3',
