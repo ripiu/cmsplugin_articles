@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# ripiu.cmsplugin_articles - Italian
+# Copyright (C) Studio Ri+
+# This file is distributed under the same license as the
+# ripiu.cmsplugin_articles package.
+# matteo vezzola <matteo@studioripiu.it>, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-07 11:15+0100\n"
+"POT-Creation-Date: 2017-12-07 13:33+0100\n"
 "PO-Revision-Date: 2017-10-01 01:06+0200\n"
 "Last-Translator: matteo\n"
 "Language-Team: \n"
@@ -21,51 +22,67 @@ msgstr ""
 msgid "Articles and sections"
 msgstr "Articoli e sezioni"
 
-#: cms_plugins.py:11 models.py:77
+#: cms_plugins.py:12 models.py:93
 msgid "Article"
 msgstr "Articolo"
 
-#: cms_plugins.py:22 models.py:87
+#: cms_plugins.py:53 models.py:103
 msgid "Section"
 msgstr "Sezione"
 
-#: models.py:26
+#: models.py:28
 msgid "title"
 msgstr "titolo"
 
-#: models.py:30
+#: models.py:32
 msgid "heading level"
 msgstr "gerarchia titolo"
 
-#: models.py:33
+#: models.py:35
 msgid "Choose a heading level"
 msgstr "Scegli un livello per il titolo"
 
-#: models.py:37
+#: models.py:39
 msgid "subtitle"
 msgstr "sottotitolo"
 
-#: models.py:52
+#: models.py:55
+msgid "left"
+msgstr "sinistra"
+
+#: models.py:56
+msgid "right"
+msgstr "destra"
+
+#: models.py:57
+msgid "center"
+msgstr "centro"
+
+#: models.py:62
 msgid "featured image"
 msgstr "immagine"
 
-#: models.py:57
+#: models.py:67
 msgid "thumbnail option"
 msgstr "opzione di anteprima immagine"
 
-#: models.py:72
+#: models.py:71
+msgid "image alignment"
+msgstr "allineamento immagine"
+
+#: models.py:88
 msgid "Full article page"
 msgstr "Approfondimento"
 
-#: models.py:73
+#: models.py:89
 msgid "You may specify a page with a full article"
 msgstr "Puoi specificare una pagina dove leggere un approfondimento"
 
-#: models.py:78
+#: models.py:94
 msgid "Articles"
 msgstr "Articoli"
 
-#: models.py:88
+#: models.py:104
 msgid "Sections"
 msgstr "Sezioni"
 
