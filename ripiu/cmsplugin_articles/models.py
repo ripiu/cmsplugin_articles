@@ -5,6 +5,8 @@ from filer.fields.image import FilerImageField
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from .conf import settings  # NOQA
+
 
 class HeadedPluginModel(CMSPlugin):
     H1 = 1
@@ -47,9 +49,28 @@ class HeadedPluginModel(CMSPlugin):
 class ImageHeadedPluginModel(HeadedPluginModel):
     """Something with a title and a featured image"""
 
+    LEFT = 'left'
+    RIGHT = 'right'
+    CENTER = 'center'
+    FLOAT_CHOICES = ((LEFT, _('left')),
+                     (RIGHT, _('right')),
+                     (CENTER, _('center')),
+                     )
+
     featured_image = FilerImageField(
         blank=True, null=True,
         verbose_name=_('featured image'),
+    )
+
+    thumbnail_option = models.ForeignKey(
+        'filer.ThumbnailOption', null=True, blank=True,
+        verbose_name=_('thumbnail option'),
+    )
+
+    alignment = models.CharField(
+        _('image alignment'),
+        max_length=10, blank=True, null=True,
+        choices=FLOAT_CHOICES
     )
 
     class Meta:
