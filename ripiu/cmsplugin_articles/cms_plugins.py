@@ -13,6 +13,21 @@ class ArticlePlugin(CMSPluginBase):
     module = "Ri+"
     render_template = 'ripiu/cmsplugin_articles/article.html'
     allow_children = True
+    fieldsets = (
+        (_('Header'), {
+            'fields': (
+                'title',
+                'subtitle',
+                ('heading_level', 'header_alignment'),
+            )
+        }), (_('Featured image'), {
+            'fields': (
+                'featured_image',
+                'thumbnail_option',
+                'alignment',
+            )
+        }),
+    )
 
     def render(self, context, instance, placeholder):
         context = super(ArticlePlugin, self).render(
@@ -54,6 +69,21 @@ class SectionPlugin(CMSPluginBase):
     module = "Ri+"
     render_template = 'ripiu/cmsplugin_articles/section.html'
     allow_children = True
+    fieldsets = (
+        (_('Header'), {
+            'fields': (
+                'title',
+                'subtitle',
+                ('heading_level', 'header_alignment'),
+            )
+        }), (_('Featured image'), {
+            'fields': (
+                'featured_image',
+                'thumbnail_option',
+                'alignment',
+            )
+        }),
+    )
 
     def render(self, context, instance, placeholder):
         context = super(SectionPlugin, self).render(

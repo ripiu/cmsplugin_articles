@@ -1,5 +1,5 @@
 {% load thumbnail %}
-<header>
+<header{% if alignment %} class="{{ alignment }}"{% endif %}>
   {% if image %}
     {% thumbnail image thumb_opts.size crop=thumb_opts.crop upscale=thumb_opts.upscale subject_location=image.subject_location as thumbnail %}
     <img class="filer_image {% if thumb_opts.alignment %}{{ thumb_opts.alignment }}{% endif %} img-responsive"

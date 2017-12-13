@@ -7,6 +7,15 @@ from django.utils.translation import ugettext_lazy as _
 
 from .conf import settings  # NOQA
 
+LEFT = 'left'
+RIGHT = 'right'
+CENTER = 'center'
+ALIGN_CHOICES = (
+    (LEFT, _('left')),
+    (RIGHT, _('right')),
+    (CENTER, _('center')),
+)
+
 
 class HeadedPluginModel(CMSPlugin):
     H1 = 1
@@ -39,6 +48,12 @@ class HeadedPluginModel(CMSPlugin):
         _('subtitle'), max_length=400, default='', blank=True,
     )
 
+    header_alignment = models.CharField(
+        _('header alignment'),
+        max_length=10, blank=True,
+        choices=ALIGN_CHOICES
+    )
+
     def __str__(self):
         return self.title or ""
 
@@ -48,14 +63,6 @@ class HeadedPluginModel(CMSPlugin):
 
 class ImageHeadedPluginModel(HeadedPluginModel):
     """Something with a title and a featured image"""
-
-    LEFT = 'left'
-    RIGHT = 'right'
-    CENTER = 'center'
-    FLOAT_CHOICES = ((LEFT, _('left')),
-                     (RIGHT, _('right')),
-                     (CENTER, _('center')),
-                     )
 
     featured_image = FilerImageField(
         blank=True, null=True,
@@ -70,7 +77,7 @@ class ImageHeadedPluginModel(HeadedPluginModel):
     alignment = models.CharField(
         _('image alignment'),
         max_length=10, blank=True, null=True,
-        choices=FLOAT_CHOICES
+        choices=ALIGN_CHOICES
     )
 
     class Meta:
