@@ -71,7 +71,7 @@ class ArticlePlugin(HeadedPlugin):
 plugin_pool.register_plugin(ArticlePlugin)
 
 
-class SectionPlugin(CMSPluginBase):
+class SectionPlugin(HeadedPlugin):
     model = SectionPluginModel
     name = _('Section')
     render_template = 'ripiu/cmsplugin_articles/section.html'
