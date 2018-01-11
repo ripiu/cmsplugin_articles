@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+0.2.1 (2017-12-13)
+------------------
+* I'm using cmsplugin_filer_image/plugins/image/default.html to render the
+  featured image
+* Some publisher refactoring
+
 0.2.0 (2017-12-13)
 ------------------
 * Added the heading alignment

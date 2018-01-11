@@ -1,10 +1,7 @@
 {% load thumbnail %}
 <header{% if alignment %} class="{{ alignment }}"{% endif %}>
   {% if image %}
-    {% thumbnail image thumb_opts.size crop=thumb_opts.crop upscale=thumb_opts.upscale subject_location=image.subject_location as thumbnail %}
-    <img class="filer_image {% if thumb_opts.alignment %}{{ thumb_opts.alignment }}{% endif %} img-responsive"
-         src="{{ thumbnail.url }}"
-         alt="{{ image.default_alt_text }}">
+    {% include "cmsplugin_filer_image/plugins/image/default.html" with instance=image opts=image.thumbnail_option size=image.thumbnail_option.size %}
   {% endif %}
   {% if title %}
     <h{{ heading_level }}>{{ title }}</h{{ heading_level }}>
