@@ -8,7 +8,7 @@ from .models import ArticlePluginModel, SectionPluginModel
 
 
 class HeadedPlugin(CMSPluginBase):
-    module = "Ri+"
+    module = module = settings.RIPIU_ARTICLES_MODULE_NAME
     allow_children = True
     fieldsets = (
         (_('Header'), {
