@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+0.3.1 (2018-02-15)
+------------------
+* Fix: forgot to include the template filters in the manifest
+
 0.3.0 (2018-02-15)
 ------------------
 * Deprecated the featured image
