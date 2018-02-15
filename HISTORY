@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+0.2.3 (2018-02-15)
+------------------
+* Made the module name for the plugins configurable
+
 0.2.2 (2017-12-13)
 ------------------
 * Fixed a problem with SectionPlugin
