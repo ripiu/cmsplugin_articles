@@ -1,3 +1,4 @@
+from cms.models import CMSPlugin
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 
@@ -17,14 +18,33 @@ class HeadedPlugin(CMSPluginBase):
                 'subtitle',
                 ('heading_level', 'header_alignment'),
             )
-        }), (_('Featured image'), {
-            'fields': (
-                'featured_image',
-                'thumbnail_option',
-                'alignment',
-            )
         }),
+        # (_('Featured image'), {
+        #     'fields': (
+        #         'featured_image',
+        #         'thumbnail_option',
+        #         'alignment',
+        #     )
+        # }),
     )
+
+    def save_model(self, request, obj, form, change):
+        """Check for parts"""
+        response = super(HeadedPlugin, self).save_model(
+            request, obj, form, change
+        )
+        if not change:
+            # new plugin: add its parts
+            for i, c in enumerate((HeaderPlugin, MainPlugin), start=1):
+                part = CMSPlugin(
+                    parent=obj,
+                    placeholder=obj.placeholder,
+                    language=obj.language,
+                    position=i,
+                    plugin_type=c.__name__,
+                )
+                part.save()
+        return response
 
     def render(self, context, instance, placeholder):
         context = super(HeadedPlugin, self).render(
@@ -60,6 +80,26 @@ class HeadedPlugin(CMSPluginBase):
             }
         })
         return context
+
+
+class PartPlugin(CMSPluginBase):
+    module = module = settings.RIPIU_ARTICLES_MODULE_NAME
+    allow_children = True
+    require_parent = True
+    parent_classes = ['ArticlePlugin', 'SectionPlugin']
+    render_template = 'ripiu/cmsplugin_articles/part.html'
+
+
+@plugin_pool.register_plugin
+class HeaderPlugin(PartPlugin):
+    name = _('Header content')
+    child_classes = settings.RIPIU_ARTICLES_HEAD_CHILD_CLASSES
+
+
+@plugin_pool.register_plugin
+class MainPlugin(PartPlugin):
+    name = _('Main content')
+    child_classes = settings.RIPIU_ARTICLES_MAIN_CHILD_CLASSES
 
 
 @plugin_pool.register_plugin

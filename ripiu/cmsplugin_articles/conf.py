@@ -9,6 +9,8 @@ class CmspluginFilerImageAppConf(AppConf):
     IMAGE_CROP = True
     IMAGE_UPSCALE = True
     MODULE_NAME = 'Ri+'
+    HEAD_CHILD_CLASSES = None
+    MAIN_CHILD_CLASSES = None
 
     class Meta:
         prefix = 'ripiu_articles'

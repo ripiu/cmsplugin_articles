@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+0.3.0 (2018-02-15)
+------------------
+* Deprecated the featured image
+* You can add content to the header
+* It is possible to limit the plugin classes in both the header and the main
+  content via two settings in your django project
+
 0.2.3 (2018-02-15)
 ------------------
 * Made the module name for the plugins configurable
