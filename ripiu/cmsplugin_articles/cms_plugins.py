@@ -62,19 +62,15 @@ class HeadedPlugin(CMSPluginBase):
         return context
 
 
+@plugin_pool.register_plugin
 class ArticlePlugin(HeadedPlugin):
     model = ArticlePluginModel
     name = _('Article')
     render_template = 'ripiu/cmsplugin_articles/article.html'
 
 
-plugin_pool.register_plugin(ArticlePlugin)
-
-
+@plugin_pool.register_plugin
 class SectionPlugin(HeadedPlugin):
     model = SectionPluginModel
     name = _('Section')
     render_template = 'ripiu/cmsplugin_articles/section.html'
-
-
-plugin_pool.register_plugin(SectionPlugin)
