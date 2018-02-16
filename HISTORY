@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+0.3.2 (2018-02-16)
+------------------
+
+* Featured image: reactivated the edit form
+
 0.3.1 (2018-02-15)
 ------------------
 * Fix: forgot to include the template filters in the manifest

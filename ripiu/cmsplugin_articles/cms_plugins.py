@@ -19,13 +19,13 @@ class HeadedPlugin(CMSPluginBase):
                 ('heading_level', 'header_alignment'),
             )
         }),
-        # (_('Featured image'), {
-        #     'fields': (
-        #         'featured_image',
-        #         'thumbnail_option',
-        #         'alignment',
-        #     )
-        # }),
+        (_('Featured image'), {
+            'fields': (
+                'featured_image',
+                'thumbnail_option',
+                'alignment',
+            )
+        }),
     )
 
     def save_model(self, request, obj, form, change):
