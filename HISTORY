@@ -1,6 +1,14 @@
 CHANGELOG
 =========
 
+0.4.0 (2018-02-22)
+------------------
+
+* Removed the featured image
+* Added a template selection option to the plugins
+* Added an attribute field
+* Fix: the full article link works again
+
 0.3.2 (2018-02-16)
 ------------------
 

@@ -1,11 +1,12 @@
 from cms.models import CMSPlugin
 from cms.models.fields import PageField
-from filer.fields.image import FilerImageField
+from djangocms_attributes_field.fields import AttributesField
 
+from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from .conf import settings  # NOQA
+from .conf import settings as conf  # NOQA
 
 LEFT = 'left'
 RIGHT = 'right'
@@ -15,6 +16,14 @@ ALIGN_CHOICES = (
     (RIGHT, _('right')),
     (CENTER, _('center')),
 )
+
+
+def get_templates():
+    choices = [
+        ('default', _('Default')),
+    ]
+    choices += settings.RIPIU_ARTICLES_TEMPLATES
+    return choices
 
 
 class HeadedPluginModel(CMSPlugin):
@@ -31,6 +40,18 @@ class HeadedPluginModel(CMSPlugin):
         (H4, 'H4'),
         (H5, 'H5'),
         (H6, 'H6'),
+    )
+
+    template = models.CharField(
+        _('Template'),
+        choices=get_templates(),
+        default=get_templates()[0][0],
+        max_length=255,
+    )
+
+    attributes = AttributesField(
+        verbose_name=_('Attributes'),
+        blank=True,
     )
 
     title = models.CharField(
@@ -61,30 +82,7 @@ class HeadedPluginModel(CMSPlugin):
         abstract = True
 
 
-class ImageHeadedPluginModel(HeadedPluginModel):
-    """Something with a title and a featured image"""
-
-    featured_image = FilerImageField(
-        blank=True, null=True,
-        verbose_name=_('featured image'),
-    )
-
-    thumbnail_option = models.ForeignKey(
-        'filer.ThumbnailOption', null=True, blank=True,
-        verbose_name=_('thumbnail option'),
-    )
-
-    alignment = models.CharField(
-        _('image alignment'),
-        max_length=10, blank=True, null=True,
-        choices=ALIGN_CHOICES
-    )
-
-    class Meta:
-        abstract = True
-
-
-class ArticlePluginModel(ImageHeadedPluginModel):
+class ArticlePluginModel(HeadedPluginModel):
     """
     An article
     """
@@ -101,7 +99,7 @@ class ArticlePluginModel(ImageHeadedPluginModel):
         verbose_name_plural = _('Articles')
 
 
-class SectionPluginModel(ImageHeadedPluginModel):
+class SectionPluginModel(HeadedPluginModel):
     """
     A section
     """

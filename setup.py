@@ -27,8 +27,8 @@ setup(
     # TODO: check requirements
     install_requires=[
         'Django >= 1.8',
-        'django-cms >= 3.1',
-        'django-filer >= 1.2.4',
+        'django-cms >= 3.2.0',
+        'djangocms-attributes-field>=0.1.1',
         'django-appconf',
     ],
     # ripiu is an implicit namespace package, so I need python>=3.3

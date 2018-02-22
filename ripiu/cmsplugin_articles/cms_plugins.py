@@ -19,13 +19,13 @@ class HeadedPlugin(CMSPluginBase):
                 ('heading_level', 'header_alignment'),
             )
         }),
-        (_('Featured image'), {
+        (_('Advanced settings'), {
+            'classes': ('collapse',),
             'fields': (
-                'featured_image',
-                'thumbnail_option',
-                'alignment',
+                'template',
+                'attributes',
             )
-        }),
+        })
     )
 
     def save_model(self, request, obj, form, change):
@@ -47,39 +47,12 @@ class HeadedPlugin(CMSPluginBase):
         return response
 
     def render(self, context, instance, placeholder):
-        context = super(HeadedPlugin, self).render(
-            context, instance, placeholder
-        )
-        thumb_opts = {
-            'width': settings.RIPIU_ARTICLES_IMAGE_WIDTH,
-            'height': settings.RIPIU_ARTICLES_IMAGE_HEIGHT,
-            'crop': settings.RIPIU_ARTICLES_IMAGE_CROP,
-            'upscale': settings.RIPIU_ARTICLES_IMAGE_UPSCALE,
+        classes = '%(class_name)s ' % {
+            'class_name': settings.RIPIU_ARTICLES_CLASSNAME,
         }
-        if instance.alignment:
-            thumb_opts['alignment'] = instance.alignment
-        if instance.thumbnail_option:
-            if instance.thumbnail_option.width:
-                thumb_opts['width'] = instance.thumbnail_option.width
-            if instance.thumbnail_option.height:
-                thumb_opts['height'] = instance.thumbnail_option.height
-            thumb_opts['crop'] = instance.thumbnail_option.crop
-            thumb_opts['upscale'] = instance.thumbnail_option.upscale
-        thumb_opts['size'] = (
-            thumb_opts['width'],
-            thumb_opts['height'],
-        )
-        context.update({
-            'instance': instance,
-            'placeholder': placeholder,
-            'featured_image': {
-                'image': instance.featured_image,
-                'thumbnail_option': thumb_opts,
-                'alignment': instance.alignment,
-                # 'alt': instance.featured_image.default_alt_text,
-            }
-        })
-        return context
+        classes += instance.attributes.get('class', '')
+        instance.attributes['class'] = classes
+        return super(HeadedPlugin, self).render(context, instance, placeholder)
 
 
 class PartPlugin(CMSPluginBase):
@@ -106,11 +79,24 @@ class MainPlugin(PartPlugin):
 class ArticlePlugin(HeadedPlugin):
     model = ArticlePluginModel
     name = _('Article')
-    render_template = 'ripiu/cmsplugin_articles/article.html'
+    fieldsets = HeadedPlugin.fieldsets + (
+        (_('Footer'), {
+            'classes': ['collapse'],
+            'fields': ('full_article', )
+        }),)
+
+    def get_render_template(self, context, instance, placeholder):
+        return 'ripiu/cmsplugin_articles/%(template)s/article.html' % {
+            'template': instance.template,
+        }
 
 
 @plugin_pool.register_plugin
 class SectionPlugin(HeadedPlugin):
     model = SectionPluginModel
     name = _('Section')
-    render_template = 'ripiu/cmsplugin_articles/section.html'
+
+    def get_render_template(self, context, instance, placeholder):
+        return 'ripiu/cmsplugin_articles/%(template)s/section.html' % {
+            'template': instance.template,
+        }
