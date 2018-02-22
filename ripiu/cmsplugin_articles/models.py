@@ -1,6 +1,7 @@
 from cms.models import CMSPlugin
 from cms.models.fields import PageField
 from djangocms_attributes_field.fields import AttributesField
+from modelmixins import ModelMixin
 
 from django.conf import settings
 from django.db import models
@@ -26,6 +27,20 @@ def get_templates():
     return choices
 
 
+class TemplateAttributesMixin(ModelMixin):
+    template = models.CharField(
+        _('Template'),
+        choices=get_templates(),
+        default=get_templates()[0][0],
+        max_length=255,
+    )
+
+    attributes = AttributesField(
+        verbose_name=_('Attributes'),
+        blank=True,
+    )
+
+
 class HeadedPluginModel(CMSPlugin):
     H1 = 1
     H2 = 2
@@ -40,18 +55,6 @@ class HeadedPluginModel(CMSPlugin):
         (H4, 'H4'),
         (H5, 'H5'),
         (H6, 'H6'),
-    )
-
-    template = models.CharField(
-        _('Template'),
-        choices=get_templates(),
-        default=get_templates()[0][0],
-        max_length=255,
-    )
-
-    attributes = AttributesField(
-        verbose_name=_('Attributes'),
-        blank=True,
     )
 
     title = models.CharField(
@@ -82,7 +85,7 @@ class HeadedPluginModel(CMSPlugin):
         abstract = True
 
 
-class ArticlePluginModel(HeadedPluginModel):
+class ArticlePluginModel(TemplateAttributesMixin, HeadedPluginModel):
     """
     An article
     """
@@ -99,7 +102,7 @@ class ArticlePluginModel(HeadedPluginModel):
         verbose_name_plural = _('Articles')
 
 
-class SectionPluginModel(HeadedPluginModel):
+class SectionPluginModel(TemplateAttributesMixin, HeadedPluginModel):
     """
     A section
     """
