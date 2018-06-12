@@ -10,7 +10,6 @@ def split_parts(children):
     leftover = []
     if children:
         for child in children:
-            print('child: %s' % child.plugin_type)
             if child.plugin_type == 'HeaderPlugin':
                 head = child
             elif child.plugin_type == 'MainPlugin':
