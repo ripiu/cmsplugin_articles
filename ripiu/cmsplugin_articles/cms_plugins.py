@@ -1,4 +1,3 @@
-from cms.models import CMSPlugin
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.conf import settings
@@ -27,23 +26,23 @@ class HeadedPlugin(CMSPluginBase):
         })
     )
 
-    def save_model(self, request, obj, form, change):
-        """Check for parts"""
-        response = super().save_model(
-            request, obj, form, change
-        )
-        if not change:
-            # new plugin: add its parts
-            for i, c in enumerate((HeaderPlugin, MainPlugin), start=1):
-                part = CMSPlugin(
-                    parent=obj,
-                    placeholder=obj.placeholder,
-                    language=obj.language,
-                    position=i,
-                    plugin_type=c.__name__,
-                )
-                part.save()
-        return response
+    # def save_model(self, request, obj, form, change):
+    #     """Check for parts"""
+    #     response = super().save_model(
+    #         request, obj, form, change
+    #     )
+    #     if not change:
+    #         # new plugin: add its parts
+    #         for i, c in enumerate((HeaderPlugin, MainPlugin), start=1):
+    #             part = CMSPlugin(
+    #                 parent=obj,
+    #                 placeholder=obj.placeholder,
+    #                 language=obj.language,
+    #                 position=i,
+    #                 plugin_type=c.__name__,
+    #             )
+    #             part.save()
+    #     return response
 
     def render(self, context, instance, placeholder):
         classes = '%(class_name)s ' % {
