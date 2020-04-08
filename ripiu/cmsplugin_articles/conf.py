@@ -2,7 +2,7 @@ from appconf import AppConf
 from django.conf import settings  # NOQA
 
 
-class CmspluginFilerImageAppConf(AppConf):
+class CmspluginArticlesAppConf(AppConf):
     MODULE_NAME = 'Ri+'
     HEAD_CHILD_CLASSES = None
     MAIN_CHILD_CLASSES = None
