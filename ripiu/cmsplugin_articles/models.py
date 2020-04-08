@@ -1,11 +1,10 @@
 from cms.models import CMSPlugin
 from cms.models.fields import PageField
-from djangocms_attributes_field.fields import AttributesField
-from modelmixins import ModelMixin
-
 from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from djangocms_attributes_field.fields import AttributesField
+from modelmixins import ModelMixin
 
 from .conf import settings as conf  # NOQA
 
@@ -13,9 +12,9 @@ LEFT = 'left'
 RIGHT = 'right'
 CENTER = 'center'
 ALIGN_CHOICES = (
-    (LEFT, _('left')),
-    (RIGHT, _('right')),
-    (CENTER, _('center')),
+    (LEFT, _('Left')),
+    (RIGHT, _('Right')),
+    (CENTER, _('Center')),
 )
 
 
@@ -58,28 +57,28 @@ class HeadedPluginModel(CMSPlugin):
     )
 
     title = models.CharField(
-        _('title'), max_length=400, default='', blank=True
+        _('Title'), max_length=400, default='', blank=True
     )
 
     heading_level = models.PositiveSmallIntegerField(
-        _('heading level'),
+        _('Heading level'),
         choices=HEADING_LEVELS,
         default=H2,
         help_text=_('Choose a heading level'),
     )
 
     subtitle = models.CharField(
-        _('subtitle'), max_length=400, default='', blank=True,
+        _('Subtitle'), max_length=400, default='', blank=True,
     )
 
     header_alignment = models.CharField(
-        _('header alignment'),
+        _('Header alignment'),
         max_length=10, blank=True,
         choices=ALIGN_CHOICES
     )
 
     def __str__(self):
-        return self.title or ""
+        return self.title or ''
 
     class Meta:
         abstract = True
@@ -93,7 +92,7 @@ class ArticlePluginModel(TemplateAttributesMixin, HeadedPluginModel):
     full_article = PageField(
         on_delete=models.SET_NULL,
         blank=True, null=True,
-        verbose_name=_("Full article page"),
+        verbose_name=_('Full article page'),
         help_text=_('You may specify a page with a full article'),
     )
 

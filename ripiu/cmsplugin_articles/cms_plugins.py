@@ -1,9 +1,8 @@
 from cms.models import CMSPlugin
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
-
-from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 
 from .models import ArticlePluginModel, SectionPluginModel
 
@@ -30,7 +29,7 @@ class HeadedPlugin(CMSPluginBase):
 
     def save_model(self, request, obj, form, change):
         """Check for parts"""
-        response = super(HeadedPlugin, self).save_model(
+        response = super().save_model(
             request, obj, form, change
         )
         if not change:
@@ -52,7 +51,7 @@ class HeadedPlugin(CMSPluginBase):
         }
         classes += instance.attributes.get('class', '')
         instance.attributes['class'] = classes
-        return super(HeadedPlugin, self).render(context, instance, placeholder)
+        return super().render(context, instance, placeholder)
 
 
 class PartPlugin(CMSPluginBase):
