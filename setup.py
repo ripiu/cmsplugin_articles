@@ -26,8 +26,8 @@ setup(
     ],
     # TODO: check requirements
     install_requires=[
-        'Django >= 1.8',
-        'django-cms >= 3.2.0',
+        'Django>=1.11',
+        'django-cms>=3.5.0',
         'djangocms-attributes-field>=0.1.1',
         'django-appconf',
         'django-model-mixins>=1.0.4',
