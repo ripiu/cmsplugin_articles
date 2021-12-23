@@ -4,7 +4,6 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from djangocms_attributes_field.fields import AttributesField
-from modelmixins import ModelMixin
 
 from .conf import settings as conf  # NOQA
 
@@ -26,7 +25,7 @@ def get_templates():
     return choices
 
 
-class TemplateAttributesMixin(ModelMixin):
+class TemplateAttributesMixin(models.Model):
     template = models.CharField(
         _('Template'),
         choices=get_templates(),
@@ -38,6 +37,9 @@ class TemplateAttributesMixin(ModelMixin):
         verbose_name=_('Attributes'),
         blank=True,
     )
+
+    class Meta:
+        abstract = True
 
 
 class HeadedPluginModel(CMSPlugin):

@@ -30,7 +30,6 @@ setup(
         'django-cms>=3.5.0',
         'djangocms-attributes-field>=0.1.1',
         'django-appconf',
-        'django-model-mixins>=1.0.4',
     ],
     # ripiu is an implicit namespace package, so I need python>=3.3
     python_requires='>=3.3',
